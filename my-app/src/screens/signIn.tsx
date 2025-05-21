@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { Switch } from "react-native";
-import { useAuth } from "../../context/auth";
-import { ThemeContext, ThemeType } from "../../theme/theme";
-import { Button } from "../../components/button";
-import { Input } from "../../components/input"
-import { Container } from "./signInStyle";
+import { useAuth } from "../context/auth";
+import { ThemeContext, ThemeType } from "../theme/theme";
+import { Button } from "../components/button";
+import { Input } from "../components/input"
+import { Container } from "./style";
 
 function SignIn() {
   const [email, setEmail] = useState('');

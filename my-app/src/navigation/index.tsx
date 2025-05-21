@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 import newspaper from '../assets/newspaper.png';
 import Login from '../screens/login';
-import SignIn from '../screens/signIn/signIn';
+import SignIn from '../screens/signIn';
 import Details from '../screens/details';
 import Home from '../screens/home';
 

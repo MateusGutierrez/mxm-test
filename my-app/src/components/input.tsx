@@ -1,25 +1,19 @@
+import styled, { useTheme } from 'styled-components/native';
 import React from 'react';
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
-import { useTheme } from 'styled-components/native';
+import { TextInput, TextInputProps } from 'react-native';
 
-export function Input(props: TextInputProps) {
-  const { colors } = useTheme();
-  return (
-    <TextInput
-      placeholderTextColor="#727272"
-      style={[styles.input, { borderColor: colors.primary, color: colors.onBackground }]}
-      {...props}
-    />
-  );
-}
+const StyledInput = styled(TextInput)`
+  width: 100%;
+  padding: 12px 16px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.input};
+  color: ${({ theme }) => theme.colors.foreground};
+  border-radius: ${({ theme }) => theme.radii.md}px;
+  margin-bottom: 8px;
+`;
 
-const styles = StyleSheet.create({
-  input: {
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    borderWidth: 1,
-    width: '100%',
-    height: 50,
-    marginBottom: 16,
-  },
-});
+export const Input = (props: TextInputProps) => {
+  const theme = useTheme();
+  return <StyledInput placeholderTextColor={theme.colors.mutedForeground} {...props} />;
+};

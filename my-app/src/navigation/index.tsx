@@ -4,10 +4,10 @@ import { createStaticNavigation, StaticParamList } from '@react-navigation/nativ
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 import newspaper from '../assets/newspaper.png';
-import Login from '../screens/login';
 import SignIn from '../screens/signIn';
 import Details from '../screens/details';
 import Home from '../screens/home';
+import SignUp from '../screens/signUp';
 
 const HomeTabs = createBottomTabNavigator({
   screens: {
@@ -39,8 +39,8 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-    Login: {
-      screen: Login,
+    SignUp: {
+      screen: SignUp,
       options: ({ navigation }) => ({
         presentation: 'modal',
         headerRight: () => (

@@ -1,7 +1,7 @@
 import { Button } from '@react-navigation/elements';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View } from 'react-native';
-import { Container } from './style';
+import { Container } from '../components/styles';
 
 function Home() {
   const navigation = useNavigation();

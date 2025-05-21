@@ -38,7 +38,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         setTheme(savedTheme);
       }
     } catch (error) {
-      console.error('Erro ao carregar o tema do MMKV:', error);
+      console.error('Erro ao carregar o tema:', error);
     }
   }
 
@@ -48,7 +48,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       SessionStorage.setItem('@theme', newTheme);
       setTheme(newTheme);
     } catch (error) {
-      console.error('Erro ao salvar o tema no MMKV:', error);
+      console.error('Erro ao salvar o tema:', error);
     }
   }
 

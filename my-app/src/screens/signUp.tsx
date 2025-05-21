@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container } from '../components/styles';
-import SignInForm from '../components/signInForm';
+import SignUpForm from '../components/signUpForm';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function SignIn() {
+function SignUp() {
   return (
     <Container>
       <Header />
-      <SignInForm />
+      <SignUpForm />
       <Footer />
     </Container>
   );
 }
 
-export default SignIn;
+export default SignUp;

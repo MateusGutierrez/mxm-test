@@ -7,7 +7,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router/>
+        <Router />
       </AuthProvider>
     </ThemeProvider>
   );

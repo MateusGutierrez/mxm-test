@@ -1,7 +1,7 @@
-import { Button } from "@react-navigation/elements";
-import { useNavigation } from "@react-navigation/native";
-import { Text, View } from "react-native";
-import { Container } from "./style";
+import { Button } from '@react-navigation/elements';
+import { useNavigation } from '@react-navigation/native';
+import { Text, View } from 'react-native';
+import { Container } from './style';
 
 function Details() {
   const navigation = useNavigation();
@@ -16,4 +16,4 @@ function Details() {
     </Container>
   );
 }
-export default Details
+export default Details;

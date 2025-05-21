@@ -45,7 +45,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   function toggleTheme() {
     const newTheme = theme === ThemeType.light ? ThemeType.dark : ThemeType.light;
     try {
-     SessionStorage.setItem('@theme', newTheme);
+      SessionStorage.setItem('@theme', newTheme);
       setTheme(newTheme);
     } catch (error) {
       console.error('Erro ao salvar o tema no MMKV:', error);
@@ -54,9 +54,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <ThemeProviderStyled theme={themes[theme]}>
-        {children}
-      </ThemeProviderStyled>
+      <ThemeProviderStyled theme={themes[theme]}>{children}</ThemeProviderStyled>
     </ThemeContext.Provider>
   );
 };

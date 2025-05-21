@@ -1,4 +1,4 @@
-import { AuthData } from "../context/auth";
+import { AuthData } from '../context/auth';
 
 const signIn = (email: string, password: string): Promise<AuthData> => {
   return new Promise((resolve, reject) => {

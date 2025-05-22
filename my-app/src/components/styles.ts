@@ -20,3 +20,23 @@ export const Container = styled.SafeAreaView`
   background-color: ${({ theme }) => theme.colors.background};
   justify-content: space-between;
 `;
+export const ContentScreen = styled.SafeAreaView`
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  padding: 0 16px;
+  width: 100%;
+  height: 500px;
+`;
+export const TitleContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  width: 100%;
+`;
+export const TitleText = styled.Text`
+  color: ${({ theme }) => theme.colors.foreground};
+  padding: 16px;
+  font-size: 24px;
+`;

@@ -12,8 +12,8 @@ export function AuthStack() {
         headerBackVisible: false,
       }}
     >
-      <Stack.Screen name="SignUp" component={SignUp} options={{ title: 'SignUp' }} />
-      <Stack.Screen name="SignIn" component={SignIn} options={{ title: 'SignIn' }} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="SignIn" component={SignIn} />
     </Stack.Navigator>
   );
 }

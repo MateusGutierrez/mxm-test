@@ -107,8 +107,12 @@ const SignUpForm = () => {
         )}
       />
 
-      <Button title="Cadastrar" onPress={handleSubmit(submit)} />
-      <Button title="Ir para login" onPress={() => navigate('SignIn')} style={{ marginTop: 16 }} />
+      <Button title="Register" onPress={handleSubmit(submit)} />
+      <Button
+        title="Go to sign in screen"
+        onPress={() => navigate('SignIn')}
+        style={{ marginTop: 16 }}
+      />
     </FormContainer>
   );
 };

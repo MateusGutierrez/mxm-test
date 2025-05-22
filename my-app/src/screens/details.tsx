@@ -1,18 +1,25 @@
 import { Button } from '@react-navigation/elements';
 import { useNavigation } from '@react-navigation/native';
-import { Text, View } from 'react-native';
-import { Container } from '../components/styles';
+import { Container, ContentScreen, TitleContainer, TitleText } from '../components/styles';
+import { Footer } from '../components/footer';
+import { Header } from '../components/header';
+import { TabsKanbanView } from '../components/tabsKanbanView';
 
 function Details() {
   const navigation = useNavigation();
 
   return (
     <Container>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
+      <Header />
+      <ContentScreen>
+        <TitleContainer>
+          <TitleText>Sign In</TitleText>
+        </TitleContainer>
+        <TabsKanbanView />
         <Button onPress={() => navigation.goBack()}>Go back</Button>
         <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-      </View>
+      </ContentScreen>
+      <Footer />
     </Container>
   );
 }

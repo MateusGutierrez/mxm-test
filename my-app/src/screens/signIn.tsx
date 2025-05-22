@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '../components/styles';
+import { Container, ContentScreen, TitleContainer, TitleText } from '../components/styles';
 import SignInForm from '../components/signInForm';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
@@ -8,7 +8,12 @@ function SignIn() {
   return (
     <Container>
       <Header />
-      <SignInForm />
+      <ContentScreen>
+        <TitleContainer>
+          <TitleText>Sign In</TitleText>
+        </TitleContainer>
+        <SignInForm />
+      </ContentScreen>
       <Footer />
     </Container>
   );

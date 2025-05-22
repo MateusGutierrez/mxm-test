@@ -1,17 +1,19 @@
-import { Button } from '@react-navigation/elements';
 import { useNavigation } from '@react-navigation/native';
-import { Text, View } from 'react-native';
 import { Container } from '../components/styles';
+import TaskForm from '../components/taskForm';
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
+import { Button } from '../components/button';
 
 function Home() {
   const navigation = useNavigation();
 
   return (
     <Container>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button onPress={() => navigation.navigate('Details')}>Go to Details</Button>
-      </View>
+      <Header />
+      <TaskForm />
+      <Button onPress={() => navigation.navigate('Details')} title={'Go to Details'} />
+      <Footer />
     </Container>
   );
 }

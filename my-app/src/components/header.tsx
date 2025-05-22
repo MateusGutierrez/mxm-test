@@ -9,6 +9,10 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid ${({ theme }) => theme.colors.muted};
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
 `;
 
 const LogoText = styled.Text`

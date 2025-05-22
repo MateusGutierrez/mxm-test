@@ -2,6 +2,7 @@ import * as Crypto from 'expo-crypto';
 import SessionStorage from 'react-native-session-storage';
 import { AuthData } from '../context/auth';
 import { TSignUpFormValue } from '../schemas/signUp';
+import Toast from 'react-native-toast-message';
 
 type MockedData = {
   hash: string;
@@ -23,13 +24,10 @@ const signIn = (email: string, password: string): Promise<AuthData> => {
       const stored = await SessionStorage.getItem('@MOCKED_PASSWORD');
       if (!stored) return reject(new Error('Usuário não encontrado'));
       const parsed: MockedData = JSON.parse(stored as string);
-
       if (!parsed.hash) {
         return reject(new Error('Usuário não encontrado'));
       }
-
       const passwordMatch = await comparePassword(password, parsed.hash);
-
       setTimeout(() => {
         if (passwordMatch) {
           resolve({
@@ -37,12 +35,16 @@ const signIn = (email: string, password: string): Promise<AuthData> => {
             email,
             name: parsed.name,
           });
+          Toast.show({
+            type: 'success',
+            text1: 'Bem-vindo(a)! 👋',
+          });
         } else {
           reject(new Error('Credenciais incorretas'));
         }
       }, 1000);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.log(error);
       reject(new Error('Erro ao validar login'));
     }
   });
@@ -66,9 +68,12 @@ const signUp = async (
           email,
           password: hashedPassword,
         });
+        Toast.show({
+          type: 'success',
+          text1: 'Cadastro realizado!',
+        });
       }, 1000);
     } catch (error) {
-      console.log('quebrou aqui', error);
       reject(error);
     }
   });

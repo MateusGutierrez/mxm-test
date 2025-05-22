@@ -7,6 +7,7 @@ import { Input } from './input';
 import { ErrorText, FormContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../context/auth';
+import { Alert } from 'react-native';
 
 const SignUpForm = () => {
   const { navigate } = useNavigation();
@@ -25,7 +26,8 @@ const SignUpForm = () => {
         await signUp(data.name, data.password, data.password);
         navigate('SignIn');
       } catch (error) {
-        console.log(error);
+        const message = error instanceof Error ? error.message : 'Tente novamente';
+        Alert.alert('Erro ao entrar', message);
       }
     },
     [navigate, signUp]

@@ -68,7 +68,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       const data = await authService.signUp(name, email, password);
       setUser(data);
     } catch (error) {
-      console.log(error, 'quebrou no context');
       const message = error instanceof Error ? error.message : 'Tente novamente';
       Alert.alert('Erro ao entrar', message);
     }

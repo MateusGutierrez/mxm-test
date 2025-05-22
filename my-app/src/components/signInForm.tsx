@@ -6,9 +6,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TSignInFormValue, SignInSchema } from '../schemas/signIn';
 import { useCallback } from 'react';
+import { useAuth } from '../context/auth';
 
 const SignInForm = () => {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
   const {
     control,
     handleSubmit,
@@ -16,11 +17,13 @@ const SignInForm = () => {
   } = useForm<TSignInFormValue>({
     resolver: zodResolver(SignInSchema),
   });
-
-  const submit = useCallback((data: TSignInFormValue) => {
-    console.log(data);
-  }, []);
-
+  const { signIn } = useAuth();
+  const submit = useCallback(
+    async (data: TSignInFormValue) => {
+      await signIn(data.email, data.password);
+    },
+    [signIn]
+  );
   return (
     <FormContainer>
       <Controller
@@ -63,7 +66,7 @@ const SignInForm = () => {
       <Button title="Entrar" onPress={handleSubmit(submit)} />
       <Button
         title="Ir para cadastro"
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigate('SignUp')}
         style={{ marginTop: 16 }}
       />
     </FormContainer>

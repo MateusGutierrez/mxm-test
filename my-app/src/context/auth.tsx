@@ -2,8 +2,8 @@ import React, { createContext, PropsWithChildren, useContext, useEffect, useStat
 import { Alert } from 'react-native';
 import { authService } from '../service/auth';
 import SessionStorage from 'react-native-session-storage';
+import { TSignUpFormValue } from '../schemas/signUp';
 
-// Tipos da autenticação
 export interface AuthData {
   token: string;
   email: string;
@@ -12,19 +12,19 @@ export interface AuthData {
 
 interface AuthContextData {
   authData?: AuthData;
+  user?: Partial<TSignUpFormValue>;
   signIn: (email: string, password: string) => Promise<void>;
+  signUp: (name: string, email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   isLoading: boolean;
 }
 
-// Criação do contexto
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-// Provider
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [user, setUser] = useState<Partial<TSignUpFormValue>>();
   useEffect(() => {
     loadStorageData();
   }, []);
@@ -63,14 +63,23 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   }
 
+  async function signUp(name: string, email: string, password: string): Promise<void> {
+    try {
+      const data = await authService.signUp(name, email, password);
+      setUser(data);
+    } catch (error) {
+      console.log(error, 'quebrou no context');
+      const message = error instanceof Error ? error.message : 'Tente novamente';
+      Alert.alert('Erro ao entrar', message);
+    }
+  }
   return (
-    <AuthContext.Provider value={{ authData, signIn, signOut, isLoading }}>
+    <AuthContext.Provider value={{ authData, signIn, signOut, isLoading, user, signUp }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Hook customizado
 export function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
   if (!context) {

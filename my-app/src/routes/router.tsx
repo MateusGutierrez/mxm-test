@@ -1,9 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { AppStack } from './appStack';
-import { AuthStack } from './authStack';
-import { useAuth } from '../context/auth';
+import { AuthProvider } from '../context/auth';
+import Routes from './routes';
 
 export function Router() {
-  const auth = useAuth();
-  return <NavigationContainer>{auth.authData ? <AppStack /> : <AuthStack />}</NavigationContainer>;
+  return (
+    <AuthProvider>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </AuthProvider>
+  );
 }

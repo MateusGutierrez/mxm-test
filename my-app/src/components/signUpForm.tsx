@@ -6,9 +6,10 @@ import { Button } from './button';
 import { Input } from './input';
 import { ErrorText, FormContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../context/auth';
 
 const SignUpForm = () => {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
 
   const {
     control,
@@ -17,10 +18,18 @@ const SignUpForm = () => {
   } = useForm<TSignUpFormValue>({
     resolver: zodResolver(SignUpSchema),
   });
-
-  const submit = useCallback((data: TSignUpFormValue) => {
-    console.log(data);
-  }, []);
+  const { signUp } = useAuth();
+  const submit = useCallback(
+    async (data: TSignUpFormValue) => {
+      try {
+        await signUp(data.name, data.password, data.password);
+        navigate('SignIn');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [navigate, signUp]
+  );
 
   return (
     <FormContainer>
@@ -96,13 +105,8 @@ const SignUpForm = () => {
         )}
       />
 
-      {/* Submit & Navigate */}
       <Button title="Cadastrar" onPress={handleSubmit(submit)} />
-      <Button
-        title="Ir para login"
-        onPress={() => navigation.navigate('SignIn')}
-        style={{ marginTop: 16 }}
-      />
+      <Button title="Ir para login" onPress={() => navigate('SignIn')} style={{ marginTop: 16 }} />
     </FormContainer>
   );
 };

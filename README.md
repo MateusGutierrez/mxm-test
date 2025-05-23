@@ -81,7 +81,8 @@ Este é um protótipo funcional de um aplicativo chamado **TaskMaster**, desenvo
 
 ## 📦 APK de Teste
 
-> Baixe o APK para Android através do link: [taskmaster.apk](https://seulink.com/taskmaster.apk) AINDA NÃO ESTÁ DISPONÍVEL
+> Baixe o APK para Android através do link: [taskmaster.apk](https://drive.google.com/file/d/1xlmGhmaE3T016K43pEPCkWpgzHdj0QVW/view?usp=sharing)
+> Build Detail expo - [Build Detail](https://expo.dev/accounts/guti_xd/projects/my-app/builds/344c42ad-165b-445c-8c1b-0a2686e646f3)
 
 ---
 

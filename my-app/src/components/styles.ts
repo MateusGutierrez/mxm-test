@@ -20,12 +20,14 @@ export const Container = styled.SafeAreaView`
   padding: ${({ theme }) => theme.space.default}px;
   background-color: ${({ theme }) => theme.colors.background};
   gap: 16px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 `;
 export const ContentScreen = styled.SafeAreaView`
   display: flex;
   align-items: start;
   justify-content: flex-start;
-  padding: 0 16px;
   width: 100%;
   height: 500px;
 `;
@@ -46,8 +48,7 @@ export const HeaderButtonsContainer = styled.View`
 `;
 export const TitleText = styled.Text`
   color: ${({ theme }) => theme.colors.foreground};
-  padding: 16px;
-  font-size: 24px;
+  font-size: 18px;
 `;
 export const DetailButtonContainer = styled.View`
   display: flex;

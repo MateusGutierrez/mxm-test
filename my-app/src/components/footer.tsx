@@ -11,10 +11,6 @@ const FooterContainer = styled.View`
   margin: 0 auto;
   bottom: 0;
   padding-bottom: 32px;
-  border: 1px solid ${({ theme }) => theme.colors.muted};
-  border-right-color: transparent;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
 `;
 
 const FooterText = styled.Text`

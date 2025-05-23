@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { FlatList, Text } from 'react-native';
 import styled from 'styled-components/native';
 import { Tabs } from './tabs';
@@ -9,7 +9,9 @@ import { useAppSelector } from '../redux/hooks/useSelector';
 import { GoBackButtonContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonSecondary } from './button';
-import { DialogDemo } from './taskModal';
+import { TaskModal } from './taskModal';
+import useIsVisible from '../utils/useIsVisible';
+import { ITask } from '../redux/task/interface';
 
 const statusLabels: Record<string, string> = {
   a_fazer: 'A FAZER',
@@ -20,9 +22,24 @@ const statusLabels: Record<string, string> = {
 export const TabsKanbanView = () => {
   const taskList = useAppSelector(state => state.task.list);
   const { navigate } = useNavigation();
+  const { show, isVisible, hide } = useIsVisible();
+  const [selectedTask, setSelectedTask] = useState<ITask | null>(null);
+
+  const openModal = useCallback(
+    (task: ITask) => {
+      setSelectedTask(task);
+      show();
+    },
+    [show]
+  );
+
+  const closeModal = useCallback(() => {
+    setSelectedTask(null);
+    hide();
+  }, [hide]);
+
   return (
     <>
-      <DialogDemo />
       <Tabs defaultValue="lista">
         <GoBackButtonContainer>
           <ButtonSecondary onPress={() => navigate('Home')} title={'Voltar'} />
@@ -36,10 +53,13 @@ export const TabsKanbanView = () => {
           <FlatList
             data={taskList}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => <TaskCardList status={item.status}>{item.task}</TaskCardList>}
+            renderItem={({ item }) => (
+              <TaskCardList status={item.status} onPress={() => openModal(item)}>
+                {item.task}
+              </TaskCardList>
+            )}
           />
         </TabsContent>
-
         <TabsContent value="kanban">
           <KanbanContainer>
             {['a_fazer', 'fazendo', 'concluido'].map(status => (
@@ -51,7 +71,9 @@ export const TabsKanbanView = () => {
                   {taskList
                     .filter(t => t.status === status)
                     .map(task => (
-                      <TaskCard key={task.id}>{task.task}</TaskCard>
+                      <TaskCard onPress={() => openModal(task)} key={task.id}>
+                        {task.task}
+                      </TaskCard>
                     ))}
                 </KanbanListContainer>
               </KanbanColumn>
@@ -59,6 +81,7 @@ export const TabsKanbanView = () => {
           </KanbanContainer>
         </TabsContent>
       </Tabs>
+      <TaskModal isVisible={isVisible} hide={closeModal} task={selectedTask} />
     </>
   );
 };
@@ -70,6 +93,7 @@ const TaskCard = styled.Text`
   margin-bottom: 8px;
   color: ${({ theme }) => theme.colors.foreground};
 `;
+
 const TaskCardList = styled.Text<{ status: string }>`
   background-color: ${({ theme }) => theme.colors.card};
   padding: 12px;
@@ -84,6 +108,7 @@ const TaskCardList = styled.Text<{ status: string }>`
   margin-bottom: 8px;
   color: ${({ theme }) => theme.colors.foreground};
 `;
+
 const KanbanContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -91,6 +116,7 @@ const KanbanContainer = styled.View`
   max-height: 500px;
   overflow: hidden;
 `;
+
 const KanbanListContainer = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`

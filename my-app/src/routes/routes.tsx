@@ -4,6 +4,6 @@ import { AuthStack } from './authStack';
 
 function Routes() {
   const auth = useAuth();
-  return !auth.authData ? <AppStack /> : <AuthStack />;
+  return auth.authData ? <AppStack /> : <AuthStack />;
 }
 export default Routes;

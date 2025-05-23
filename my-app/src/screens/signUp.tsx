@@ -3,19 +3,22 @@ import { Container, ContentScreen, TitleContainer, TitleText } from '../componen
 import SignUpForm from '../components/signUpForm';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 function SignUp() {
   return (
-    <Container>
-      <Header />
-      <ContentScreen>
-        <TitleContainer>
-          <TitleText>Cadastre-se</TitleText>
-        </TitleContainer>
-        <SignUpForm />
-      </ContentScreen>
-      <Footer />
-    </Container>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <Container>
+        <Header />
+        <ContentScreen>
+          <TitleContainer>
+            <TitleText>Cadastre-se</TitleText>
+          </TitleContainer>
+          <SignUpForm />
+        </ContentScreen>
+        <Footer />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
 

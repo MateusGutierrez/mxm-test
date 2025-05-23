@@ -42,17 +42,12 @@ const taskSlice = createSlice({
         text1: 'tarefa adicionada com sucesso!',
       });
     },
-    changeTaskStatus: (state, action) => {
-      state.list = state.list.map(item => {
-        if (item.id === action.payload.id) {
-          Toast.show({
-            type: 'success',
-            text1: 'Status editado com sucesso!',
-          });
-          return { ...item, status: action.payload.status };
-        }
-        return item;
-      });
+    updateTask: (state, action) => {
+      const { id, task, description, status } = action.payload;
+      state.list = state.list.map(item =>
+        item.id === id ? { ...item, task, description, status } : item
+      );
+      Toast.show({ type: 'success', text1: 'Tarefa atualizada!' });
     },
     removeTask: (state, action) => {
       state.list = state.list.filter(item => item.id !== action.payload);
@@ -64,5 +59,5 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, removeTask, changeTaskStatus } = taskSlice.actions;
+export const { addTask, removeTask, updateTask } = taskSlice.actions;
 export default taskSlice.reducer;

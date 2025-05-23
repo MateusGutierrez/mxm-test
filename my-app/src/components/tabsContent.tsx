@@ -10,7 +10,8 @@ interface Props {
 
 export const TabsContentContainer = styled(View)`
   overflow-y: hidden;
-  max-height: 500px;
+  max-height: 400px;
+  padding-bottom: 50px;
 `;
 
 export const TabsContent = ({ value, children }: Props) => {

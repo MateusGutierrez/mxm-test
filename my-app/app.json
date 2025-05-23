@@ -10,7 +10,10 @@
     "scheme": "myapp",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.satya164.reactnavigationtemplate"
+      "bundleIdentifier": "com.satya164.reactnavigationtemplate",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +35,11 @@
         }
       ],
       "react-native-edge-to-edge"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "340f5452-d61d-41f7-83a1-d22b439721ef"
+      }
+    }
   }
 }

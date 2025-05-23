@@ -7,11 +7,18 @@ Este é um protótipo funcional de um aplicativo chamado **TaskMaster**, desenvo
 
 ---
 
+## 📱 Preview do app TaskMaster
+
+![Preview](/my-app/assets/preview.gif)
+
+---
+
 ## 🚀 Funcionalidades Implementadas
 
 - **Autenticação de Usuário**
   - Tela de login
   - Tela de cadastro
+---
 
 - **Gerenciamento de Tarefas**
   - Listagem em visualizações de lista e kanban

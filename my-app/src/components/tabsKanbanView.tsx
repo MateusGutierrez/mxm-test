@@ -9,6 +9,7 @@ import { useAppSelector } from '../redux/hooks/useSelector';
 import { GoBackButtonContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonSecondary } from './button';
+import { DialogDemo } from './taskModal';
 
 const statusLabels: Record<string, string> = {
   a_fazer: 'A FAZER',
@@ -20,42 +21,45 @@ export const TabsKanbanView = () => {
   const taskList = useAppSelector(state => state.task.list);
   const { navigate } = useNavigation();
   return (
-    <Tabs defaultValue="lista">
-      <GoBackButtonContainer>
-        <ButtonSecondary onPress={() => navigate('Home')} title={'Voltar'} />
-        <TabsList>
-          <TabsTrigger value="lista">Lista</TabsTrigger>
-          <TabsTrigger value="kanban">Kanban</TabsTrigger>
-        </TabsList>
-      </GoBackButtonContainer>
+    <>
+      <DialogDemo />
+      <Tabs defaultValue="lista">
+        <GoBackButtonContainer>
+          <ButtonSecondary onPress={() => navigate('Home')} title={'Voltar'} />
+          <TabsList>
+            <TabsTrigger value="lista">Lista</TabsTrigger>
+            <TabsTrigger value="kanban">Kanban</TabsTrigger>
+          </TabsList>
+        </GoBackButtonContainer>
 
-      <TabsContent value="lista">
-        <FlatList
-          data={taskList}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => <TaskCardList status={item.status}>{item.task}</TaskCardList>}
-        />
-      </TabsContent>
+        <TabsContent value="lista">
+          <FlatList
+            data={taskList}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => <TaskCardList status={item.status}>{item.task}</TaskCardList>}
+          />
+        </TabsContent>
 
-      <TabsContent value="kanban">
-        <KanbanContainer>
-          {['a_fazer', 'fazendo', 'concluido'].map(status => (
-            <KanbanColumn key={status} status={status}>
-              <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>
-                {statusLabels[status] ?? status.toUpperCase()}
-              </Text>
-              <KanbanListContainer>
-                {taskList
-                  .filter(t => t.status === status)
-                  .map(task => (
-                    <TaskCard key={task.id}>{task.task}</TaskCard>
-                  ))}
-              </KanbanListContainer>
-            </KanbanColumn>
-          ))}
-        </KanbanContainer>
-      </TabsContent>
-    </Tabs>
+        <TabsContent value="kanban">
+          <KanbanContainer>
+            {['a_fazer', 'fazendo', 'concluido'].map(status => (
+              <KanbanColumn key={status} status={status}>
+                <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>
+                  {statusLabels[status] ?? status.toUpperCase()}
+                </Text>
+                <KanbanListContainer>
+                  {taskList
+                    .filter(t => t.status === status)
+                    .map(task => (
+                      <TaskCard key={task.id}>{task.task}</TaskCard>
+                    ))}
+                </KanbanListContainer>
+              </KanbanColumn>
+            ))}
+          </KanbanContainer>
+        </TabsContent>
+      </Tabs>
+    </>
   );
 };
 

@@ -14,6 +14,8 @@ export const darkTheme: DefaultTheme = {
     accent: '#3D2C8D',
     accentForeground: '#FFFFFF',
     destructive: '#FF4D4F',
+    warn: '#facc15',
+    success: '#22c55e',
     destructiveForeground: '#FFFFFF',
     border: '#2D2D2D',
     input: '#1A1A1A',

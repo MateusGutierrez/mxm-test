@@ -14,6 +14,8 @@ export const lightTheme: DefaultTheme = {
     accent: '#E0E0FF',
     accentForeground: '#1D013F',
     destructive: '#FF4D4F',
+    warn: '#facc15',
+    success: '#22c55e',
     destructiveForeground: '#FFFFFF',
     border: '#DDDDDD',
     input: '#F5F5F5',

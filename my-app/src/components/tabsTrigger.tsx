@@ -22,12 +22,14 @@ export const TabsTrigger = ({ value, children }: TabsTriggerProps) => {
 const TriggerButton = styled(TouchableOpacity)<{ active: boolean }>`
   flex: 1;
   padding: 12px;
-  background-color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.card)};
+  background-color: ${({ theme, active }) => (active ? theme.colors.muted : theme.colors.card)};
   align-items: center;
+  border: 1px solid ${({ theme }) => theme.colors.muted};
+  border-radius: ${({ theme }) => theme.radii.md}px;
 `;
 
 const TriggerText = styled(Text)<{ active: boolean }>`
   color: ${({ theme, active }) =>
-    active ? theme.colors.primaryForeground : theme.colors.foreground};
+    active ? theme.colors.cardForeground : theme.colors.mutedForeground};
   font-weight: 600;
 `;

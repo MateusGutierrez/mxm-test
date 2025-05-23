@@ -5,39 +5,52 @@ import { Tabs } from './tabs';
 import { TabsList } from './tabsList';
 import { TabsTrigger } from './tabsTrigger';
 import { TabsContent } from './tabsContent';
+import { useAppSelector } from '../redux/hooks/useSelector';
+import { GoBackButtonContainer } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { ButtonSecondary } from './button';
 
-const fakeTasks = [
-  { id: '1', task: 'Estudar React', status: 'a_fazer' },
-  { id: '2', task: 'Desenvolver componente', status: 'fazendo' },
-  { id: '3', task: 'Enviar PR', status: 'concluido' },
-];
+const statusLabels: Record<string, string> = {
+  a_fazer: 'A FAZER',
+  fazendo: 'FAZENDO',
+  concluido: 'CONCLUÍDO',
+};
 
 export const TabsKanbanView = () => {
+  const taskList = useAppSelector(state => state.task.list);
+  const { navigate } = useNavigation();
   return (
     <Tabs defaultValue="lista">
-      <TabsList>
-        <TabsTrigger value="lista">Lista</TabsTrigger>
-        <TabsTrigger value="kanban">Kanban</TabsTrigger>
-      </TabsList>
+      <GoBackButtonContainer>
+        <ButtonSecondary onPress={() => navigate('Home')} title={'Voltar'} />
+        <TabsList>
+          <TabsTrigger value="lista">Lista</TabsTrigger>
+          <TabsTrigger value="kanban">Kanban</TabsTrigger>
+        </TabsList>
+      </GoBackButtonContainer>
 
       <TabsContent value="lista">
         <FlatList
-          data={fakeTasks}
+          data={taskList}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <TaskCard>{item.task}</TaskCard>}
+          renderItem={({ item }) => <TaskCardList status={item.status}>{item.task}</TaskCardList>}
         />
       </TabsContent>
 
       <TabsContent value="kanban">
         <KanbanContainer>
           {['a_fazer', 'fazendo', 'concluido'].map(status => (
-            <KanbanColumn key={status}>
-              <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>{status.toUpperCase()}</Text>
-              {fakeTasks
-                .filter(t => t.status === status)
-                .map(task => (
-                  <TaskCard key={task.id}>{task.task}</TaskCard>
-                ))}
+            <KanbanColumn key={status} status={status}>
+              <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>
+                {statusLabels[status] ?? status.toUpperCase()}
+              </Text>
+              <KanbanListContainer>
+                {taskList
+                  .filter(t => t.status === status)
+                  .map(task => (
+                    <TaskCard key={task.id}>{task.task}</TaskCard>
+                  ))}
+              </KanbanListContainer>
             </KanbanColumn>
           ))}
         </KanbanContainer>
@@ -53,16 +66,43 @@ const TaskCard = styled.Text`
   margin-bottom: 8px;
   color: ${({ theme }) => theme.colors.foreground};
 `;
-
+const TaskCardList = styled.Text<{ status: string }>`
+  background-color: ${({ theme }) => theme.colors.card};
+  padding: 12px;
+  border: 1px solid
+    ${({ theme, status }) =>
+      status === 'a_fazer'
+        ? theme.colors.destructive
+        : status === 'fazendo'
+          ? theme.colors.warn
+          : theme.colors.success};
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: ${({ theme }) => theme.colors.foreground};
+`;
 const KanbanContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  gap: 8px;
+  gap: 4px;
+  max-height: 500px;
+  overflow: hidden;
+`;
+const KanbanListContainer = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  flex-grow: 1;
+  gap: 4px;
 `;
 
-const KanbanColumn = styled.View`
+const KanbanColumn = styled.View<{ status: string }>`
   flex: 1;
   padding: 8px;
-  background-color: ${({ theme }) => theme.colors.muted};
   border-radius: 8px;
+  height: 100%;
+  background-color: ${({ theme, status }) =>
+    status === 'a_fazer'
+      ? theme.colors.destructive
+      : status === 'fazendo'
+        ? theme.colors.warn
+        : theme.colors.success};
 `;

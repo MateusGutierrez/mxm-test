@@ -16,6 +16,8 @@ declare module 'styled-components/native' {
       accent: string;
       accentForeground: string;
       destructive: string;
+      warn: string;
+      success: string;
       destructiveForeground: string;
       border: string;
       input: string;

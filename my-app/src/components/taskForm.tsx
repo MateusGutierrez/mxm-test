@@ -3,7 +3,6 @@ import { Input } from './input';
 import { TextArea } from './textarea';
 import { SelectDropdown } from './selectStatus';
 import { ErrorText, FormContainer } from './styles';
-import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
@@ -13,21 +12,27 @@ import { useAppDispatch } from '../redux/hooks/useAppDispatch';
 
 const TaskForm = () => {
   const dispatch = useAppDispatch();
-  const { navigate } = useNavigation();
-
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TTaskFormValue>({
     resolver: zodResolver(TaskSchema),
   });
 
   const submit = useCallback(
     (data: TTaskFormValue) => {
-      dispatch(addTask(data));
+      dispatch(
+        addTask({
+          task: data.task,
+          description: data.description,
+          status: data.status,
+        })
+      );
+      reset();
     },
-    [dispatch]
+    [dispatch, reset]
   );
 
   return (
@@ -75,8 +80,7 @@ const TaskForm = () => {
         )}
       />
 
-      <Button title="add task" onPress={handleSubmit(submit)} />
-      <Button title="Logout" style={{ marginTop: 16 }} />
+      <Button title="Adicionar tarefa" onPress={handleSubmit(submit)} />
     </FormContainer>
   );
 };

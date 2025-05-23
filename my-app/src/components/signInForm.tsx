@@ -1,4 +1,4 @@
-import { Button } from './button';
+import { Button, ButtonSecondary } from './button';
 import { Input } from './input';
 import { ErrorText, FormContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -38,7 +38,7 @@ const SignInForm = () => {
               onChangeText={onChange}
               value={value}
             />
-            {errors.email && <ErrorText>{errors.email.message || 'Email is required.'}</ErrorText>}
+            {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
           </>
         )}
       />
@@ -56,16 +56,14 @@ const SignInForm = () => {
               onChangeText={onChange}
               value={value}
             />
-            {errors.password && (
-              <ErrorText>{errors.password.message || 'Password is required.'}</ErrorText>
-            )}
+            {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
           </>
         )}
       />
 
-      <Button title="Login" onPress={handleSubmit(submit)} />
-      <Button
-        title="Go to sign up screen"
+      <Button title="Entrar" onPress={handleSubmit(submit)} />
+      <ButtonSecondary
+        title="Não tem conta ? Cadastre-se"
         onPress={() => navigate('SignUp')}
         style={{ marginTop: 16 }}
       />

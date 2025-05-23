@@ -1,5 +1,5 @@
 export interface ITask {
-  id: Date | string;
+  id: string;
   task: string;
   status: string;
   description: string;

@@ -12,7 +12,6 @@ const StyledTextArea = styled(TextInput)`
   color: ${({ theme }) => theme.colors.foreground};
   border-radius: ${({ theme }) => theme.radii.md}px;
   margin-bottom: 8px;
-  text-align-vertical: top;
 `;
 
 export const TextArea = (props: TextInputProps) => {

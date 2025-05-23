@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import styled from 'styled-components/native';
 
 interface TabsProps {
   children: React.ReactNode;
@@ -13,12 +13,16 @@ interface TabsContextType {
 
 const TabsContext = React.createContext<TabsContextType | null>(null);
 
+export const TabsContainer = styled.View`
+  padding: 0 16px;
+`;
+
 export const Tabs = ({ children, defaultValue }: TabsProps) => {
   const [value, setValue] = useState(defaultValue);
 
   return (
     <TabsContext.Provider value={{ value, setValue }}>
-      <View>{children}</View>
+      <TabsContainer>{children}</TabsContainer>
     </TabsContext.Provider>
   );
 };

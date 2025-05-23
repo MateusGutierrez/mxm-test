@@ -2,7 +2,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { SignUpSchema, TSignUpFormValue } from '../schemas/signUp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
-import { Button } from './button';
+import { Button, ButtonSecondary } from './button';
 import { Input } from './input';
 import { ErrorText, FormContainer } from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -35,19 +35,16 @@ const SignUpForm = () => {
 
   return (
     <FormContainer>
-      {/* Name */}
       <Controller
         control={control}
         name="name"
         render={({ field: { onChange, onBlur, value } }) => (
           <>
-            <Input placeholder="Name" onBlur={onBlur} onChangeText={onChange} value={value} />
-            {errors.name && <ErrorText>{errors.name.message || 'Name is required.'}</ErrorText>}
+            <Input placeholder="Nome" onBlur={onBlur} onChangeText={onChange} value={value} />
+            {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
           </>
         )}
       />
-
-      {/* Email */}
       <Controller
         control={control}
         name="email"
@@ -60,12 +57,10 @@ const SignUpForm = () => {
               onChangeText={onChange}
               value={value}
             />
-            {errors.email && <ErrorText>{errors.email.message || 'Email is required.'}</ErrorText>}
+            {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
           </>
         )}
       />
-
-      {/* Password */}
       <Controller
         control={control}
         name="password"
@@ -73,19 +68,15 @@ const SignUpForm = () => {
           <>
             <Input
               secureTextEntry
-              placeholder="Password"
+              placeholder="Senha"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
             />
-            {errors.password && (
-              <ErrorText>{errors.password.message || 'Password is required.'}</ErrorText>
-            )}
+            {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
           </>
         )}
       />
-
-      {/* Confirm Password */}
       <Controller
         control={control}
         name="confirmPassword"
@@ -93,23 +84,19 @@ const SignUpForm = () => {
           <>
             <Input
               secureTextEntry
-              placeholder="Confirm Password"
+              placeholder="Confirme sua senha"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
             />
-            {errors.confirmPassword && (
-              <ErrorText>
-                {errors.confirmPassword.message || 'Please confirm your password.'}
-              </ErrorText>
-            )}
+            {errors.confirmPassword && <ErrorText>{errors.confirmPassword.message}</ErrorText>}
           </>
         )}
       />
 
-      <Button title="Register" onPress={handleSubmit(submit)} />
-      <Button
-        title="Go to sign in screen"
+      <Button title="Cadastrar" onPress={handleSubmit(submit)} />
+      <ButtonSecondary
+        title="Voltar"
         onPress={() => navigate('SignIn')}
         style={{ marginTop: 16 }}
       />

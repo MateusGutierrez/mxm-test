@@ -5,6 +5,12 @@ const FooterContainer = styled.View`
   width: 100%;
   padding-top: 24px;
   align-items: center;
+  z-index: 2;
+  background-color: ${({ theme }) => theme.colors.popover};
+  position: absolute;
+  margin: 0 auto;
+  bottom: 0;
+  padding-bottom: 32px;
   border: 1px solid ${({ theme }) => theme.colors.muted};
   border-right-color: transparent;
   border-left-color: transparent;

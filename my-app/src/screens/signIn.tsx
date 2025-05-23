@@ -10,7 +10,7 @@ function SignIn() {
       <Header />
       <ContentScreen>
         <TitleContainer>
-          <TitleText>Sign In</TitleText>
+          <TitleText>Login</TitleText>
         </TitleContainer>
         <SignInForm />
       </ContentScreen>

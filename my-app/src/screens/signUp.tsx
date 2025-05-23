@@ -10,7 +10,7 @@ function SignUp() {
       <Header />
       <ContentScreen>
         <TitleContainer>
-          <TitleText>Sign Up</TitleText>
+          <TitleText>Cadastre-se</TitleText>
         </TitleContainer>
         <SignUpForm />
       </ContentScreen>

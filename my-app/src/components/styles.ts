@@ -16,9 +16,10 @@ export const FormContainer = styled.View`
 `;
 export const Container = styled.SafeAreaView`
   flex: 1;
+  position: relative;
   padding: ${({ theme }) => theme.space.default}px;
   background-color: ${({ theme }) => theme.colors.background};
-  justify-content: space-between;
+  gap: 16px;
 `;
 export const ContentScreen = styled.SafeAreaView`
   display: flex;
@@ -35,8 +36,31 @@ export const TitleContainer = styled.View`
   padding: 0 16px;
   width: 100%;
 `;
+export const HeaderButtonsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  width: 100%;
+`;
 export const TitleText = styled.Text`
   color: ${({ theme }) => theme.colors.foreground};
   padding: 16px;
   font-size: 24px;
+`;
+export const DetailButtonContainer = styled.View`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 16px;
+  width: 100%;
+`;
+export const GoBackButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
 `;
